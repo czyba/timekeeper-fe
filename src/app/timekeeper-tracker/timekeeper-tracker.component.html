@@ -1,0 +1,27 @@
+<h1>Current Timer</h1>
+
+<p>Start Time: {{ (start$ | async | date: "d MMM yyyy HH:mm") ?? "" }}</p>
+<p>Current Time: {{ currentTime$ | async | date: "d MMM yyyy HH:mm" }}</p>
+
+<mat-form-field class="timekeeper-tracker-input-width">
+  <mat-label>Description</mat-label>
+  <input matInput [formControl]="description" />
+</mat-form-field>
+
+<button
+  mat-raised-button
+  color="primary"
+  disabled="{{ (start$ | async) !== null }}"
+  (click)="onStart()"
+>
+  Start
+</button>
+<button
+  mat-raised-button
+  color="accent"
+  disabled="{{ (start$ | async) === null || !description.valid }}"
+  class="timekeeper-tracker-button-spacing"
+  (click)="onStop()"
+>
+  Stop
+</button>

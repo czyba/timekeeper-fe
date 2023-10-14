@@ -1,0 +1,15 @@
+<mat-list>
+  <ng-container
+    *ngFor="let dayEntry of currentEntries$ | async; let last = last"
+  >
+    <div mat-subheader>{{ dayEntry.day | date: "d MMM y" }}</div>
+    <mat-list-item *ngFor="let entry of dayEntry.entries">
+      <div matListItemTitle>{{ entry.description }}</div>
+      <div matListItemLine>
+        {{ dateDiffInHours(entry.start, entry.end) }}h -
+        {{ entry.start | date: "HH:mm" }} - {{ entry.end | date: "HH:mm" }}
+      </div>
+    </mat-list-item>
+    <mat-divider *ngIf="!last"></mat-divider>
+  </ng-container>
+</mat-list>
